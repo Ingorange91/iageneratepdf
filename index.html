@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabla editable con Género y PDF</title>
+  <style>
+    table { border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 8px 12px; border: 1px solid #000; }
+    button { margin-left: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Agregar datos a la tabla</h2>
+  <form id="formTabla">
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="number" id="edad" placeholder="Edad" required>
+    <select id="genero" required>
+      <option value="">Seleccionar género</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Femenino">Femenino</option>
+      <option value="Otro">Otro</option>
+    </select>
+    <button type="submit">Agregar</button>
+  </form>
+
+  <h3>Tabla</h3>
+  <table id="tablaDatos">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Género</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <form action="file.php" method="post" id="formPDF">
+    <input type="hidden" name="datos" id="datosParaPDF">
+    <button type="submit">Generar PDF</button>
+  </form>
+
+  <script>
+    const formTabla = document.getElementById("formTabla");
+    const tablaBody = document.querySelector("#tablaDatos tbody");
+    const datosInput = document.getElementById("datosParaPDF");
+    const formPDF = document.getElementById("formPDF");
+
+    formTabla.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("nombre").value;
+      const edad = document.getElementById("edad").value;
+      const genero = document.getElementById("genero").value;
+
+      if (nombre && edad && genero) {
+        agregarFila(nombre, edad, genero);
+        formTabla.reset();
+      }
+    });
+
+    function agregarFila(nombre, edad, genero) {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td>${nombre}</td>
+        <td>${edad}</td>
+        <td>${genero}</td>
+        <td>
+          <button type="button" class="editar">Editar</button>
+          <button type="button" class="eliminar">Eliminar</button>
+        </td>
+      `;
+
+      tablaBody.appendChild(fila);
+    }
+
+    // Delegar eventos de clic en botones de la tabla
+    tablaBody.addEventListener("click", function(e) {
+      const target = e.target;
+      const fila = target.closest("tr");
+
+      if (target.classList.contains("editar")) {
+        const celdas = fila.querySelectorAll("td");
+        const nuevoNombre = prompt("Editar nombre:", celdas[0].innerText);
+        const nuevaEdad = prompt("Editar edad:", celdas[1].innerText);
+        const nuevoGenero = prompt("Editar género (Masculino, Femenino, Otro):", celdas[2].innerText);
+
+        if (nuevoNombre !== null && nuevaEdad !== null && nuevoGenero !== null) {
+          celdas[0].innerText = nuevoNombre;
+          celdas[1].innerText = nuevaEdad;
+          celdas[2].innerText = nuevoGenero;
+        }
+      }
+
+      if (target.classList.contains("eliminar")) {
+        fila.remove();
+      }
+    });
+
+    // Preparar datos antes de enviar a PHP
+    formPDF.addEventListener("submit", function(e) {
+      const filas = Array.from(tablaBody.rows);
+      const datos = filas.map(fila => ({
+        nombre: fila.cells[0].innerText,
+        edad: fila.cells[1].innerText,
+        genero: fila.cells[2].innerText
+      }));
+
+      datosInput.value = JSON.stringify(datos);
+    });
+  </script>
+</body>
+</html>
