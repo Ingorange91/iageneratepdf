@@ -180,7 +180,7 @@ function convertirFechaAISO(fecha) {
 docenteSelect.addEventListener('change', async(e)=>{
   const agregarHTML=document.getElementById('grupo');
   const value=e.target.value;
-  //agregarHTML
+
   
   fetch("./src/php/selectGrupos.php", {
     method: "POST",
@@ -195,12 +195,34 @@ docenteSelect.addEventListener('change', async(e)=>{
     })
     .then(html => {
       agregarHTML.innerHTML = html;
+        const grupoSelect = document.getElementById("grado");
+
+        grupoSelect.addEventListener('change', () => {
+          const clave = grupoSelect.value;
+          const selectedOption = grupoSelect.options[grupoSelect.selectedIndex];
+          const rfc = selectedOption.getAttribute("data-rfc");
+          const grupo = selectedOption.getAttribute("data-grupo");
+
+
+          console.log("Clave:", clave);
+          console.log("RFC:", rfc);
+          console.log("Grupo:", grupo); 
+        });
     })
     .catch(error => {
       console.error("Error:", error);
       contenedor.innerHTML = "<p>Error al cargar el select.</p>";
     });
+    console.log("cambiando el primer select")
+
+    
+
+
+
+
 });
+
+
 
 
 
