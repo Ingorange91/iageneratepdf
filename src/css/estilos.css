@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background-color: #f9f9f9;
+  color: #111;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+  color: #003366;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  flex: 1 1 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #0056cc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #003f99;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: fixed;
+  width: 100%;
+
+
+}
+
+
+th {
+  background-color: #003366;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+td select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px;
+  font-size: 14px;
+}
+
+
+td, th {
+  vertical-align: middle;
+  text-align: center;
+  padding: 12px;
+}
+
+td {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+
+td:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+}
+
+td button {
+  padding: 6px 12px;
+  line-height: 1;
+}
+
+td input[type="text"],
+td input[type="date"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px;
+  font-size: 14px;
+}
+
+
+.acciones{
+  display: flex;
+  
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.acciones button{
+  /* background-color: cyan; */
+  flex-grow: 1;
+  border-radius: .25em;
+  margin-right: .5rem;
+}
+
+.editar, .eliminar {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.editar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.editar:hover {
+  background-color: #0056b3;
+}
+
+.eliminar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.eliminar:hover {
+  background-color: #c82333;
+}
+
+
+
+@media (max-width: 600px) {
+  form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

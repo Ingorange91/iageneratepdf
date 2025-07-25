@@ -1,6 +1,7 @@
 <?php
 
-require_once './dompdf/vendor/autoload.php';
+require_once '../../vendor/autoload.php';
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -11,21 +12,24 @@ $datos = json_decode($datosJSON, true);
 // Preparar HTML para el PDF
 $html = '
   <h2 style="text-align: center;">Tabla de Datos</h2>
+  <p>Renglón de escritura para su edición</p>
   <table border="1" cellpadding="8" cellspacing="0" width="100%">
     <thead>
       <tr style="background-color: #f2f2f2;">
-        <th>Nombre</th>
-        <th>Edad</th>
-        <th>Género</th>
+        <th>DOCENTE</th>
+        <th>RFC</th>
+        <th>FECHA</th>
       </tr>
     </thead>
     <tbody>';
 
 foreach ($datos as $fila) {
     $html .= '<tr>
-                <td>' . htmlspecialchars($fila['nombre']) . '</td>
-                <td>' . htmlspecialchars($fila['edad']) . '</td>
-                <td>' . htmlspecialchars($fila['genero']) . '</td>
+
+                <td>' . htmlspecialchars(strtoupper($fila['docenteApellido']) ) . '<br> '.htmlspecialchars(strtoupper($fila['docenteNombre']) ).'<br>'.strtoupper($fila['rfc']).' </td>
+                <td>' . htmlspecialchars($fila['fecha']) . '</td>
+                <td>' . htmlspecialchars($fila['fecha']) . '</td>
+                
               </tr>';
 }
 
@@ -46,5 +50,5 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 // Enviar al navegador
-$dompdf->stream("tabla.pdf", ["Attachment" => false]);
+$dompdf->stream("datos_docentes.pdf", ["Attachment" => false]);
 exit;
