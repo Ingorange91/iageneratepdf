@@ -13,7 +13,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Formulario con Tabla</title>
-  <link rel="stylesheet" href="./src//css/estilos.css">
+  <link rel="stylesheet" href="./src/css/estilos.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -38,6 +38,9 @@
     </select>
           <!-- aqui se agregara el contenido -->
     <div id="grupo"></div>
+
+    <!-- opcion A <input type="radio" name="aaa" value="(UNA)">
+    opccion B <input type="radio" name="aaa" value="(DOS)" > -->
  <button type="submit">Agregar</button>
     </form>
 
@@ -59,6 +62,7 @@
       <button type="submit">Generar PDF</button>
     </form>
   </div>
+
 
   <script src="./src/js/main.js"></script>
 </body>
